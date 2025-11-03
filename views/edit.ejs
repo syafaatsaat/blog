@@ -1,0 +1,28 @@
+<%- include("partials/header.ejs") %>
+
+<h1><a href="/">thoughts.</a></h1>
+
+<form action="/">
+    <input type="submit" value="discard" />
+</form>
+
+<% let postTitle = "" %>
+<% let postContent = "" %>
+<% if (locals.title) { %>
+    <% postTitle = title %>
+    <% postContent = content %>
+    <button type="submit" form="newPost" value="save">save</button>
+<% } else { %>
+    <button type="submit" form="newPost" value="done">done</button>
+<% } %>
+
+<form action="/edit" method="post" id="newPost">
+    <input type="text" id="title" name="title" 
+    placeholder="Title" value="<%= postTitle %>" required>
+    <input type="text" id="content" name="content"
+    placeholder="Express your thoughts..." value="<%= postContent %>" required>
+</form>
+
+</main>
+</body>
+</html>

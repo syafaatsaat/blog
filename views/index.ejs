@@ -1,0 +1,29 @@
+<%- include("partials/header.ejs") %>
+
+<main>
+    <h1><a href="/">thoughts.</a></h1>
+
+    <a href="/edit">start thinking...</a>
+
+    <% if (locals.posts) { %>
+        <% posts.forEach((post) => { %>
+            <!-- List goes here if current second is even. -->
+            <div>
+                <a href="posts/<%= post.id %>/<%= post.title %>">
+                    <h3><%= post.title %></h3>
+                    <% let firstFewText = post.content.substring(0, 100) %>
+                    <p><%= firstFewText %></p>
+                </a>
+                <p><%= post.date %></p>
+                <a href="edit/<%= post.title %>">
+                    Edit
+                </a>
+                <a href="delete/<%= post.title %>">
+                    Delete
+                </a>
+            </div>
+        <% }); %>
+    <% } %>
+</main>
+
+<%- include("partials/footer.ejs") %>

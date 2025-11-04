@@ -4,12 +4,22 @@ import _ from "lodash";
 
 const app = express();
 const port = 3000;
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 // store all posts here
 const postArray = Array();
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// converts a date (Date()) variable into a string with the format (Month Day, Year) = (Apr 16, 1996) 
+function convertDateToString(date) {
+  return months[date.getMonth()] + " " + date.getDate().toString() + ", " + date.getFullYear().toString();
+}
+
+// ------------------------------------------------------------
+// DEFAULT GET ROUTE ------------------------------------------
+// ------------------------------------------------------------
 
 // default route displaying the posts
 app.get("/", (req, res) => {
@@ -40,10 +50,11 @@ app.get("/edit/:postID/:postTitle", (req, res) => {
 // processes them with body parse
 // stores them as an object inside postArray 
 app.post("/create", (req, res) => {
+  let newDate = new Date();
   let newPost = {
     "title": req.body["title"],
     "content": req.body["content"],
-    "date": Date()
+    "date": convertDateToString(newDate)
   };
 
   postArray.push(newPost);
@@ -62,7 +73,7 @@ app.post("/edit/:postID/:postTitle", (req, res) => {
 });
 
 // ------------------------------------------------------------
-// DELETE ROUTE BELOW -----------------------------------------
+// DELETE ROUTE -----------------------------------------------
 // ------------------------------------------------------------
 
 app.get("/delete/:postID/:postTitle", (req, res) => {
@@ -93,6 +104,10 @@ app.get("/posts/:postID/:postTitle", (req, res) => {
     content: thePost.content
   });
 })
+
+// ------------------------------------------------------------
+// LISTENING PORT ---------------------------------------------
+// ------------------------------------------------------------
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

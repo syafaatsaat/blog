@@ -6,21 +6,12 @@
     <input type="submit" value="discard" />
 </form>
 
-<% let postTitle = "" %>
-<% let postContent = "" %>
-<% if (locals.title) { %>
-    <% postTitle = title %>
-    <% postContent = content %>
-    <button type="submit" form="newPost" value="save">save</button>
-<% } else { %>
-    <button type="submit" form="newPost" value="done">done</button>
-<% } %>
-
-<form action="/edit" method="post" id="newPost">
+<button type="submit" form="newPost" value="save">save</button>
+<form action="/edit/<%= id %>/<%= title %>" method="post" id="newPost">
     <input type="text" id="title" name="title" 
-    placeholder="Title" value="<%= postTitle %>" required>
+    placeholder="Title" value="<%= title %>" required>
     <input type="text" id="content" name="content"
-    placeholder="Express your thoughts..." value="<%= postContent %>" required>
+    placeholder="Express your thoughts..." value="<%= content %>" required>
 </form>
 
 </main>

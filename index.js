@@ -7,13 +7,6 @@ const port = 3000;
 
 // store all posts here
 const postArray = Array();
-let nextFreeID = 0;
-
-// make separate ejs for post creation/editing site (edit-post.ejs)
-
-// make another separate ejs for post view site (view-post.ejs)
-    // set tab title to post title
-
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,27 +18,28 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/edit", (req, res) => {
-  res.render("edit.ejs");
+// ------------------------------------------------------------
+// EDIT ROUTES BELOW ------------------------------------------
+// ------------------------------------------------------------
+
+app.get("/create", (req, res) => {
+  res.render("create.ejs");
 });
 
-app.get("/edit/:postID", (req, res) => {
-  let postTitle = req.params.postID;
+app.get("/edit/:postID/:postTitle", (req, res) => {
+  let postID = req.params.postID;
 
-  postArray.forEach(post => {
-    if (_.toLower(postTitle) == _.toLower(post.title)) {
-      res.render("edit.ejs", {
-        title: post.title,
-        content: post.content
-      });
-    }
+  res.render("edit.ejs", {
+    id: postID,
+    title: postArray[postID].title,
+    content: postArray[postID].content
   });
 });
 
-// edit post method which receives input (post title and content)
+// create post method which receives input (post title and content)
 // processes them with body parse
 // stores them as an object inside postArray 
-app.post("/edit", (req, res) => {
+app.post("/create", (req, res) => {
   let newPost = {
     "title": req.body["title"],
     "content": req.body["content"],
@@ -56,19 +50,47 @@ app.post("/edit", (req, res) => {
   res.redirect('/');
 });
 
+// edit post method which receives input (post title and content)
+// processes them with body parse
+// stores them as an object inside postArray 
+app.post("/edit/:postID/:postTitle", (req, res) => {
+  let postID = req.params.postID;
+  postArray[postID].title = req.body["title"];
+  postArray[postID].content = req.body["content"];
+
+  res.redirect('/');
+});
+
+// ------------------------------------------------------------
+// CREATE ROUTES BELOW ----------------------------------------
+// ------------------------------------------------------------
+
+app.get("/delete/:postID/:postTitle", (req, res) => {
+  let postID = req.params.postID;
+  console.log("postArray (before): ", postArray);
+
+  postArray.splice(postID, 1);
+  console.log("postArray (after): ", postArray);
+
+  res.redirect('/');
+});
+
+// ------------------------------------------------------------
+// POST VIEW ROUTE --------------------------------------------
+// ------------------------------------------------------------
+
 // post get method that initializes routes to the individual post on their own pages
 app.get("/posts/:postID/:postTitle", (req, res) => {
   let postID = req.params.postID;
   let postTitle = req.params.postTitle;
 
-  postArray.forEach(post => {
-    if (_.toLower(postTitle) == _.toLower(post.title)) {
-      res.render("post.ejs", {
-        title: post.title,
-        date: post.date,
-        content: post.content
-      });
-    }
+  let thePost = postArray[postID];
+  console.log(postTitle, " == ", thePost.title, " : ", postTitle == thePost.title);
+
+  res.render("post.ejs", {
+    title: thePost.title,
+    date: thePost.date,
+    content: thePost.content
   });
 })
 

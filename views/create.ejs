@@ -1,0 +1,19 @@
+<%- include("partials/header.ejs"), {title: "new thought"} %>
+
+<h1><a href="/">thoughts.</a></h1>
+
+<form action="/">
+    <input type="submit" value="discard" />
+</form>
+
+<button type="submit" form="newPost" value="done">done</button>
+<form action="/create" method="post" id="newPost">
+    <input type="text" id="title" name="title" 
+    placeholder="Title" required>
+    <input type="text" id="content" name="content"
+    placeholder="Express your thoughts..." required>
+</form>
+
+</main>
+</body>
+</html>

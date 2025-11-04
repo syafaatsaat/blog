@@ -11,7 +11,7 @@ const postArray = Array();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//
+// default route displaying the posts
 app.get("/", (req, res) => {
   res.render("index.ejs", {
     posts: postArray
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 // ------------------------------------------------------------
-// EDIT ROUTES BELOW ------------------------------------------
+// CREATE AND EDIT ROUTES BELOW -------------------------------
 // ------------------------------------------------------------
 
 app.get("/create", (req, res) => {
@@ -62,7 +62,7 @@ app.post("/edit/:postID/:postTitle", (req, res) => {
 });
 
 // ------------------------------------------------------------
-// CREATE ROUTES BELOW ----------------------------------------
+// DELETE ROUTE BELOW -----------------------------------------
 // ------------------------------------------------------------
 
 app.get("/delete/:postID/:postTitle", (req, res) => {

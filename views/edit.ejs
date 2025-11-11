@@ -1,18 +1,29 @@
 <%- include("partials/header.ejs") %>
 
-<h1><a href="/">thoughts.</a></h1>
+<header> 
+    <nav class="navbar">
+        <div class="container-md border-bottom py-3 mb-4">
+            <a href="/" class="logo erase-link-underscore"><span>thoughts.</span></a>
+            <nav class="nav gap-3">
+                <form action="/">
+                    <input type="submit" class="btn btn-secondary poppins-regular" value="discard" />
+                </form>
+                <button type="submit" class="btn btn-success poppins-regular" form="newPost">save</button>
+            </nav>
+        </div>
+    </nav>
+</header>
 
-<form action="/">
-    <input type="submit" value="discard" />
-</form>
-
-<button type="submit" form="newPost" value="save">save</button>
-<form action="/edit/<%= id %>/<%= title %>" method="post" id="newPost">
-    <input type="text" id="title" name="title" 
-    placeholder="Title" value="<%= title %>" required>
-    <input type="text" id="content" name="content"
-    placeholder="Express your thoughts..." value="<%= content %>" required>
-</form>
+<div class="container-md">
+    <form action="/edit/<%= id %>/<%= title %>" method="post" id="newPost">
+        <div class="mb-3">
+            <textarea type="text" class="border-0 shadow-none w-100 no-resize-textarea title" id="title txtarea" name="title" placeholder="Title" required><%= title %></textarea>
+        </div>
+        <div class="mb-3">
+            <textarea type="text" class="border-0 shadow-none w-100 no-resize-textarea content" id="content" name="content" placeholder="Express your thoughts..." required><%= content %></textarea>
+        </div>
+    </form>
+</div>
 
 </main>
 </body>

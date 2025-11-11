@@ -1,0 +1,69 @@
+textarea {
+  field-sizing: content;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+p {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  color: #666666;
+}
+
+.no-resize-textarea {
+  resize: none;
+}
+
+.title {
+  font-size: xx-large;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: black;
+}
+
+.arvo-regular {
+  font-family: "Arvo", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.content {
+  font-size: large;
+  color: black;
+}
+
+.erase-link-underscore {
+  text-decoration: none;
+}
+
+.logo {
+  font-family: "Arvo", serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 32px;
+  color: #434343;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.post-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

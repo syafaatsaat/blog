@@ -1,11 +1,13 @@
 <%- include("partials/header.ejs"), {title: title} %>
 
+<%- include("partials/navbar.ejs") %>
+
 <main>
-    <h1><a href="/">thoughts.</a></h1>
-    
-    <h2><%= title %></h2>
-    <h4><%= date %></h4>
-    <p><%= content %></p>
+    <div class="container-md pb-4">
+        <p class="title"><%= title %></p>
+        <p><%= date %></p>
+        <p class="content"><%= content %></p>
+    </div>
 </main>
 
 <%- include("partials/footer.ejs") %>
